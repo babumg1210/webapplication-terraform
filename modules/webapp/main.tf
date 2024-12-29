@@ -16,14 +16,24 @@ resource "azurerm_service_plan" "this" {
   #  capacity = var.sku_capacity
   #}
 }
-
-resource "azurerm_app_service" "this" {
+resource "azurerm_windows_web_app" "this" {
   name                = var.web_app_name
   location            = azurerm_resource_group.this.location
   resource_group_name = azurerm_resource_group.this.name
-  app_service_plan_id = azurerm_service_plan.this.id  # Corrected reference
+  app_service_plan_id = azurerm_service_plan.this.id  # Correct reference
 
   app_settings = {
     "WEBSITE_NODE_DEFAULT_VERSION" = "14"  # Example setting for Node.js
   }
 }
+
+#resource "azurerm_app_service" "this" {
+ # name                = var.web_app_name
+ # location            = azurerm_resource_group.this.location
+ # resource_group_name = azurerm_resource_group.this.name
+ # app_service_plan_id = azurerm_service_plan.this.id  # Corrected reference
+
+  #app_settings = {
+   # "WEBSITE_NODE_DEFAULT_VERSION" = "14"  # Example setting for Node.js
+  #}
+#}
