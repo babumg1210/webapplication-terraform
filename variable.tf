@@ -22,20 +22,4 @@ variable "web_app_name" {
   default     = "wpmappservice"
 }
 
-variable "sku_tier" {
-  description = "The SKU tier for the App Service Plan"
-  type        = string
-  default     = "Basic"
-}
 
-variable "sku_size" {
-  description = "The SKU size for the App Service Plan"
-  type        = string
-  default     = "B1"
-}
-
-variable "sku_capacity" {
-  description = "The capacity for the App Service Plan"
-  type        = number
-  default     = 1
-}
