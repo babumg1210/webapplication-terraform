@@ -14,7 +14,7 @@ steps:
   inputs:
     terraformVersion: 'latest'
 
-- task: TerraformTaskV1@0
+- task: TerraformTaskV4@4
   inputs:
     provider: 'azurerm'
     command: 'init'
@@ -24,22 +24,28 @@ steps:
     backendAzureRmStorageAccountName: 'ecommercestorage1210'
     backendAzureRmContainerName: 'webapp'
     backendAzureRmKey: 'terraform.tfstate'
+
 - task: TerraformTaskV4@4
   inputs:
     provider: 'azurerm'
     command: 'validate'
     workingDirectory: '$(System.DefaultWorkingDirectory)' 
+
 - task: TerraformTaskV4@4
   inputs:
     provider: 'azurerm'
     command: 'plan'
     environmentServiceNameAzureRM: 'storage-sc'
     workingDirectory: '$(System.DefaultWorkingDirectory)'
+
 - task: TerraformTaskV4@4
   inputs:
     provider: 'azurerm'
     command: 'apply'
     environmentServiceNameAzureRM: 'storage-sc'
     workingDirectory: '$(System.DefaultWorkingDirectory)'
+    commandOptions: '-auto-approve'  # Automatically approve the apply
 
-
+- script: |
+    echo "Web App URL: $(terraform output -raw web_app_url)"
+  displayName: 'Output Web App URL'
