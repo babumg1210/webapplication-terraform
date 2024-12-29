@@ -8,6 +8,7 @@ resource "azurerm_service_plan" "this" {
   location            = azurerm_resource_group.this.location
   resource_group_name = azurerm_resource_group.this.name
   os_type             = "Windows"  # Optional, can be omitted if not needed
+
   sku {
     tier     = var.sku_tier
     size     = var.sku_size
