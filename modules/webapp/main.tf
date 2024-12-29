@@ -8,30 +8,27 @@ resource "azurerm_service_plan" "this" {
   location            = azurerm_resource_group.this.location
   resource_group_name = azurerm_resource_group.this.name
   os_type             = "Windows"  # Optional, can be omitted if not needed
-  sku_name            = "P1v2"
 
-  #sku {
-  #  tier     = var.sku_tier
-  #  size     = var.sku_size
-  #  capacity = var.sku_capacity
-  #}
+  sku {
+    tier     = "PremiumV2"  # Specify the tier
+    size     = "P1v2"       # Specify the size
+    capacity = 1             # Specify the capacity
+  }
 }
+
 resource "azurerm_windows_web_app" "this" {
   name                = var.web_app_name
   location            = azurerm_resource_group.this.location
   resource_group_name = azurerm_resource_group.this.name
-  service_plan_id = azurerm_service_plan.this.id  # Correct reference 
-  
-  site_config {}
+  service_plan_id     = azurerm_service_plan.this.id  # Correct reference 
+
+  site_config {
+    # You can add specific site configurations here if needed
+    # For example, to set the default document:
+    default_documents = ["index.html"]
+  }
+
+  app_settings = {
+    "WEBSITE_NODE_DEFAULT_VERSION" = "14"  # Example setting for Node.js
+  }
 }
-
-#resource "azurerm_app_service" "this" {
- # name                = var.web_app_name
- # location            = azurerm_resource_group.this.location
- # resource_group_name = azurerm_resource_group.this.name
- # app_service_plan_id = azurerm_service_plan.this.id  # Corrected reference
-
-  #app_settings = {
-   # "WEBSITE_NODE_DEFAULT_VERSION" = "14"  # Example setting for Node.js
-  #}
-#}
