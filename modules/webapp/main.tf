@@ -4,7 +4,7 @@ resource "azurerm_resource_group" "this" {
 }
 
 resource "azurerm_app_service_plan" "this" {
-  name                = "${var.app_service_plan_name}-plan"
+  name                = var.app_service_plan_name
   location            = azurerm_resource_group.this.location
   resource_group_name = azurerm_resource_group.this.name
   sku {
@@ -20,7 +20,7 @@ resource "azurerm_app_service" "this" {
   resource_group_name = azurerm_resource_group.this.name
   app_service_plan_id = azurerm_app_service_plan.this.id
 
-  app_settings = {
-    "WEBSITE_NODE_DEFAULT_VERSION" = "14"  # Example setting for Node.js
-  }
+  #app_settings = {
+   # "WEBSITE_NODE_DEFAULT_VERSION" = "14"  # Example setting for Node.js
+ # }
 }
