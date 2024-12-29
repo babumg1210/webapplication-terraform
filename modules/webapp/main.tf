@@ -3,7 +3,7 @@ resource "azurerm_resource_group" "this" {
   location = var.location
 }
 
-resource "azurerm_app_service_plan" "this" {
+resource "azurerm_service_plan" "this" {
   name                = var.app_service_plan_name
   location            = azurerm_resource_group.this.location
   resource_group_name = azurerm_resource_group.this.name
