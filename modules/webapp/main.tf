@@ -7,13 +7,14 @@ resource "azurerm_service_plan" "this" {
   name                = var.app_service_plan_name
   location            = azurerm_resource_group.this.location
   resource_group_name = azurerm_resource_group.this.name
-  #os_type             = "Windows"  # Optional, can be omitted if not needed
+  os_type             = "Windows"  # Optional, can be omitted if not needed
+  sku_name            = "P1v2"
 
-  sku {
-    tier     = var.sku_tier
-    size     = var.sku_size
-    capacity = var.sku_capacity
-  }
+  #sku {
+  #  tier     = var.sku_tier
+  #  size     = var.sku_size
+  #  capacity = var.sku_capacity
+  #}
 }
 
 resource "azurerm_app_service" "this" {
