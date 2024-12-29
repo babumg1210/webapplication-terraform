@@ -20,11 +20,9 @@ resource "azurerm_windows_web_app" "this" {
   name                = var.web_app_name
   location            = azurerm_resource_group.this.location
   resource_group_name = azurerm_resource_group.this.name
-  app_service_plan_id = azurerm_service_plan.this.id  # Correct reference
-
-  app_settings = {
-    "WEBSITE_NODE_DEFAULT_VERSION" = "14"  # Example setting for Node.js
-  }
+  service_plan_id = azurerm_service_plan.this.id  # Correct reference 
+  
+  site_config {}
 }
 
 #resource "azurerm_app_service" "this" {
