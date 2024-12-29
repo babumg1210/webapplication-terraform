@@ -1,25 +1,25 @@
 variable "resource_group_name" {
   description = "The name of the resource group"
   type        = string
-  default     = "my-resource-group"
+  default     = "WPM-RG"
 }
 
 variable "location" {
   description = "The Azure region to deploy resources"
   type        = string
-  default     = "East US"
+  default     = "Australia East"
 }
 
 variable "app_service_plan_name" {
   description = "The name of the App Service Plan"
   type        = string
-  default     = "my-app-service-plan"
+  default     = "wpmappserviceplan"
 }
 
 variable "web_app_name" {
   description = "The name of the Web App"
   type        = string
-  default     = "my-web-app"
+  default     = "wpmappservice"
 }
 
 variable "sku_tier" {
